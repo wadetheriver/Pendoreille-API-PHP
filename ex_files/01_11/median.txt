@@ -1,0 +1,8 @@
+﻿$med = $this->array_length/2;
+if ($this->array_length % 2) {
+    $med = floor($med);
+    return $this->array[$med];
+} else {
+    $midvals = $this->array[$med-1] + $this->array[$med];
+    return round($midvals/2, $precision);
+}
