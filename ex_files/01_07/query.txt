@@ -1,2 +1,0 @@
-﻿'UPDATE environmental_data SET air_temp = :air, bar_press = :bar, wind_speed = :wind
- WHERE date_recorded = :date'
