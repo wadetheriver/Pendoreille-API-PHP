@@ -28,11 +28,22 @@ for ($year = 2001; $year <= 2010; $year++) {
 
     fclose($file);
 
+    //get each dataset as they come in
+    foreach ($dataset as $date => $subarrays) {
+
+        echo $date . "<hr/>";
+        echo "air: " . implode(',', $subarrays['air_temp']) . "<br/>";
+        echo "barometric pressure: " . implode(',', $subarrays['bar_press']) . "<br/>";
+        echo "wind speed: " . implode(',', $subarrays['wind_speed']) . "<br/>";
+
+    }
+
+    echo "<pre>";
+    print_r($dataset);
+    echo "<pre>";
+
 }
 
-echo"<pre>";
-print_r($dataset);
-echo"<pre>";
 
 ?>
 
