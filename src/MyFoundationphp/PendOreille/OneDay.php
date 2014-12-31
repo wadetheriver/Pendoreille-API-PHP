@@ -1,5 +1,5 @@
 <?php
-namespace Foundationphp\PendOreille;
+namespace MyFoundationphp\PendOreille;
 
 /**
  * Class OneDay
@@ -62,8 +62,8 @@ class OneDay {
 
     public function __construct(\DateTime $date, \PDO $db, $table)
     {
-        $this->dateFormat = $date->format('Y_m_d');
-        $this->year = $date->format('Y');
+        $this->dateFormat = $date->format('Y_m_d'); //used in url
+        $this->year = $date->format('Y'); //used in url
         $this->db = $db;
         $this->table = $table;
         $this->getData('air');
@@ -89,7 +89,7 @@ class OneDay {
      */
     protected function getData($type)
     {
-        switch ($type) {
+        switch ($type) { //constructor runs sequentially through these
             case 'air':
                 $page = $this->air;
                 break;
@@ -122,7 +122,7 @@ class OneDay {
      * Inserts data into database table
      */
     protected function processData()
-    {
+    {   // See Sandbox version to inspect array data stored in this->stats
         // Create prepared statement
         $sql = "INSERT INTO $this->table (date_recorded, air_temp, bar_press, wind_speed)
                 VALUES (:date, :air, :bar, :wind)";
@@ -130,10 +130,11 @@ class OneDay {
 
         // Bind values to the named parameters
         // Set value to NULL if no data
+        //store entire stats sub arrays as comma separated text
         $statement->bindParam(':date', $this->dateFormat);
         if (isset($this->stats['air'])) {
             $air = implode(',', $this->stats['air']);
-            $statement->bindParam(':air', $air);
+            $statement->bindParam(':air', $air); //bindParam accepts only a variable
         } else {
             $statement->bindValue(':air', null, \PDO::PARAM_NULL);
         }

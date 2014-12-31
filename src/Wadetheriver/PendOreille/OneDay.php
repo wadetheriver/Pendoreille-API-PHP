@@ -120,7 +120,7 @@ class OneDay {
         } else {
             foreach ($lines as $line) {
                 // Extract data following the last space in the line
-                $this->stats[$type][] = substr($line, strrpos($line, ' ')+1);
+                $this->stats[$type][] = substr($line, strrpos($line, ' ')+1); //start at first character of line after space
             }
         }
     }
@@ -130,6 +130,10 @@ class OneDay {
      */
     protected function processData()
     {
+        echo "<pre>";
+        echo $this->dateFormat;
+        print_r($this->stats);
+        echo "</pre>";
 
         if (isset($this->stats['air'])) {
             $air = implode(',', $this->stats['air']);

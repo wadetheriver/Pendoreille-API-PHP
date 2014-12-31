@@ -1,4 +1,8 @@
 <?php
+/**
+see sandbox preliminary version for comments
+
+ */
 ini_set('max_execution_time', '0');
 $start = microtime(true); //Return current Unix timestamp with microseconds
 try {

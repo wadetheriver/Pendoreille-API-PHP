@@ -5,6 +5,8 @@ date_default_timezone_set("America/Los_Angeles"); //need to set this in php.ini 
 //This will populate the date column with all dates
 
 $startDate = new DateTime('2001-01-12');
+//only prime up to 5/26 since 5/27 is incomplete
+//starting on 5/27 each day has its own text file
 $endDate = new DateTime('2010-05-26');
 $oneDay = new DateInterval('P1D'); //knows days in month and if is a leap year. One day interval
 try {
