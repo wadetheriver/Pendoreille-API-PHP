@@ -1,4 +1,6 @@
 <?php
+//example data from 2001
+//lpo.dt.navy.mil/data/DM/Environmental_Data_2001.txt
 ini_set('max_execution_time', '0');
 $url = 'http://lpo.dt.navy.mil/data/DM/Environmental_Data_';
 //single text files for these years include all the data

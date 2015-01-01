@@ -27,7 +27,8 @@ try {
 //    }
 
     // get the rest of the year from june to december
-    $months = range(6, 12);
+    $year = 2014;
+    $months = range(1, 11);
     $months30 = array(4, 6, 9, 11); //months with 30 days
     foreach ($months as $month) {
         if (in_array($month, $months30)) {
@@ -38,7 +39,8 @@ try {
             $days = range(1, 31);
         }
         foreach ($days as $day) {
-            $pend = new OneDay(new DateTime("2010/$month/$day"), $db, $table);
+            //instantiate the days, one at a time
+            $pend = new OneDay(new DateTime("$year/$month/$day"), $db, $table);
             $messages[] = $pend->getMessages();
         }
     }
@@ -57,3 +59,4 @@ foreach ($messages as $message) {
     }
 }
 echo '</ul>';
+
