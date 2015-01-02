@@ -53,3 +53,44 @@ if(!$start) {
                 BETWEEN '$start' AND '$end'";
     }
 }
+
+if ($error) {
+    print_r($error);
+}
+
+if(!$error) {
+    try{
+        $db = new PDO('mysql:host=localhost;dbname=pendoreille', 'pendadmin', 'lynda');
+
+        $air = '';
+        $bar = '';
+        $wind = '';
+        $missing = array();
+
+        ////PDO query can be used in foreach
+        foreach ($db->query($sql) as $row) {
+            //if air is null all data is null for that date
+            if(is_null($row['air_temp'])) {
+                $missing[] = $row['date_recorded'];
+            } else {
+                $air .= $row['air_temp'] . ","; //concatenate each row with data to the new variables
+                $bar .= $row['bar_press'] . ",";
+                $wind .= $row['wind_speed'] . ",";
+            }
+
+        }
+
+        if($missing) {
+            $remarks = "No data recorded for:  " . implode(', ', $missing);
+        }
+
+        echo "<br/>";
+        $air = explode(',', $air);
+        echo count($air) . " Readings for just air!";
+
+
+    } catch (Exception $e){
+        $exception = $e->getMessage();
+        $error = array('error' => 'Database must be down or something!');
+    }
+}
