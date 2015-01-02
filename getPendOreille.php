@@ -1,4 +1,6 @@
 <?php
+ini_set('max_execution_time', 0);
+date_default_timezone_set("America/Los_Angeles");
 //keep the DB up to date
 //using shell script in this example
 //Id like this to always be up to date
@@ -23,6 +25,6 @@ try {
 
 echo '<ul>';
 foreach ($messages as $message) {
-    echo "<li>$item</li>";
+    echo "<li>$message</li>";
 }
 echo '</ul>';

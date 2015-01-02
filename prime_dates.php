@@ -19,7 +19,7 @@ try {
          */
         $stmt->bindValue(':date', $startDate->format('Y-m-d'));
         $stmt->execute();
-        $startDate->add($oneDay);
+        $startDate->add($oneDay); //increment the start date using the DateInterval Class
 
         echo $startDate->format('Y-m-d') . "Done <br/>";
     }

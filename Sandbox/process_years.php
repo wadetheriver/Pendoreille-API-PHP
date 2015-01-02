@@ -8,7 +8,7 @@ for ($year = 2001; $year <= 2010; $year++) {
     $ws = $year < 2007 ? 1 : 7;
     $at = $year < 2007 ? 4 : 1;
     $bp = $year < 2007 ? 6 : 2;
-    $file = fopen('rawdata/' . $year . '.txt', 'r');
+    $file = fopen('../rawdata/' . $year . '.txt', 'r');
     $firstline = fgets($file); //gets first line and moves pointer to second where the actual data is
 
     //data is in a tab separated list

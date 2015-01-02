@@ -120,7 +120,11 @@ class OneDay {
         } else {
             foreach ($lines as $line) {
                 // Extract data following the last space in the line
-                $this->stats[$type][] = substr($line, strrpos($line, ' ')+1); //start at first character of line after space
+
+/**  store reading @ time now,not pursuing this further today for DM station
+ *   station is down on this day jan1 2015
+ */
+                $this->stats[$type][] = substr($line, strrpos($line, ' ')+1) . "@" . substr($line, 11, 8); //start at first character of line after space
             }
         }
     }

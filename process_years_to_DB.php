@@ -11,7 +11,7 @@ try {
                           bar_press = :bar, wind_speed = :wind
                           WHERE date_recorded = :date');
     $errorInfo = $stmt->errorInfo();
-    if (isset($errorInfo[2])) { //3 element will be set if error in statement
+    if (isset($errorInfo[2])) { //3rd element will be set if error in statement
         echo $errorInfo[2];
     }
     for ($year = 2001; $year <= 2010; $year++) {
@@ -19,7 +19,8 @@ try {
         $a = $year < 2007 ? 4 : 1;
         $b = $year < 2007 ? 6 : 2;
         $file = fopen('rawdata/' . $year . '.txt', 'r');
-        $firstline = fgets($file);
+        $firstline = fgets($file); //gets first line and moves pointer to second where the actual data is
+        //create our own data array of the data
         $dataset = array();
         while (($line = fgetcsv($file, 500, "\t")) !== false) {
             $date = substr($line[0], 0, 10);
@@ -30,6 +31,7 @@ try {
 
         fclose($file); //close the file for this year
 
+        //bind the values in our array to the prepared statement values
         foreach ($dataset as $date => $subarrays) {
             /* When binding the values to the named parameters, the PDO bindParam()
              * method should be used only with variables. The date is stored as a
