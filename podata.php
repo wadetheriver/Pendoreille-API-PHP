@@ -1,4 +1,8 @@
 <?php
+
+use MyFoundationphp\Calculate; //filename is Average.php
+require_once('src/MyFoundationphp/Average.php');
+
 date_default_timezone_set("America/Los_Angeles");
 // Initialize variables
 $start = null;
@@ -54,7 +58,7 @@ if(!$start) {
     }
 }
 
-if ($error) {
+if ($error) { //debugging
     print_r($error);
 }
 
@@ -82,11 +86,34 @@ if(!$error) {
 
         if($missing) {
             $remarks = "No data recorded for:  " . implode(', ', $missing);
+            echo $remarks;
         }
 
-        echo "<br/>";
-        $air = explode(',', $air);
-        echo count($air) . " Readings for just air!";
+       if($air) {
+           //strpos finds first instance of needle, strrpos finds last
+           $final_comma = strrpos($air, ','); //final comma in data string produce and empty array value...
+           $air =  explode (',', substr($air, 0, $final_comma));
+       }
+        if($bar) {
+            $final_comma = strrpos($bar, ',');
+            $bar =  explode (',', substr($bar, 0, $final_comma));
+        }
+        if($wind) {
+            $final_comma = strrpos($wind, ',');
+            $wind =  explode (',', substr($wind, 0, $final_comma));
+        }
+
+        $dmdata = array(
+            'Air Temperature' => $air,
+            'Barometric Pressure' => $bar,
+            'Wind Speed' => $wind
+        );
+
+        echo "<pre>";
+        print_r($dmdata);
+        echo "<pre>";
+
+
 
 
     } catch (Exception $e){
