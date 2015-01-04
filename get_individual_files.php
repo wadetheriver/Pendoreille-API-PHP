@@ -16,10 +16,10 @@ try {
     //last full day was 5/26
     //days are now stored in single text files
     //simple usage of class, last few days of month of may
-    $month = 12; //may
-    $days = range(1,30);
+    $month = 1; //may
+    $days = range(1,1);
     foreach($days as $day){
-        $pend = new OneDay(new DateTime("2014/$month/$day"), $db, $table);
+        $pend = new OneDay(new DateTime("2015/$month/$day"), $db, $table);
 
         //why storing messages in array unless adding new array elements here?
         //iterate multi dim array below
