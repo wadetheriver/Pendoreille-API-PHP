@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="maclocal2">
+  <component name="PublishConfigData" serverName="localhosr">
     <serverData>
-      <paths name="maclocal2">
+      <paths name="localhosr">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="poapi_php/" />
+            <mapping local="$PROJECT_DIR$" web="/Pendoreille-API-PHP" />
           </mappings>
         </serverdata>
       </paths>

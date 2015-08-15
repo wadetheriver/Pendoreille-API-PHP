@@ -27,6 +27,10 @@ try {
             $dataset[$date]['air_temp'][] = ltrim($line[$a]);
             $dataset[$date]['bar_press'][] = ltrim($line[$b]);
             $dataset[$date]['wind_speed'][] = ltrim($line[$w]);
+
+            echo $date . "<br>";
+            echo $dataset . $date['air_temp'];
+
         }
 
         fclose($file); //close the file for this year

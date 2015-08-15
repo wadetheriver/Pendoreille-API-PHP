@@ -16,7 +16,7 @@ try {
     //last full day was 5/26
     //days are now stored in single text files
     //simple usage of class, last few days of month of may
-    $month = 1; //may
+    $month = 5; //may
     $days = range(1,1);
     foreach($days as $day){
         $pend = new OneDay(new DateTime("2015/$month/$day"), $db, $table);
