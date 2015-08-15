@@ -100,8 +100,20 @@ class OneDay {
                 $page = $this->wind;
                 break;
         }
-        // Build the URL for the current date and page
+
+       /*
+        * Build the URL for the current date and page
+        *
+        * Access to the raw provisional data at this time has been suspended....
+        * But as of 8-15-2015 you can
+        * still get individual stats data as in example:
+        * http://lpo.dt.navy.mil/data/DM/2015/2015_08_03/Barometric_Press
+        *
+        * */
+
         $url = $this->baseUrl . '/' . $this->year . '/' . $this->dateFormat . '/' . $page;
+
+        echo "<h2> url: " . $url . '</h2><br>';
 
         // Access the file and store each line in an array
         // @ suppresses PHP warnings if file doesn't exist or can't be opened
@@ -115,6 +127,9 @@ class OneDay {
                 // Extract data following the last space in the line
                 $this->stats[$type][] = substr($line, strrpos($line, ' ')+1);
             }
+            echo "<pre";
+            print_r($this->stats);
+            echo "</pre>";
         }
     }
 
