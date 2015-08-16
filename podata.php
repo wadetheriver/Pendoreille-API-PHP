@@ -8,11 +8,6 @@ require_once('src/MyFoundationphp/Average.php');
 
 $app = new \Slim\Slim();
 
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
-});
-
-$app->run();
 
 date_default_timezone_set("America/Los_Angeles");
 // Initialize variables
@@ -22,19 +17,28 @@ $startOnly = false;
 $error = null;
 $siteInfo = null;
 
-//print_r($_GET);
 
-// Get the start and end dates from the URL
-if (isset($_GET['startDate'])) {
-    $start = verifyDate($_GET['startDate']);
-    echo $start . '<br>';
-}
-if (isset($_GET['endDate'])) {
-    $end = verifyDate($_GET['endDate']);
-    echo $end . '</br>';
-} else {
-    $startOnly = true;
-}
+$app->get('/api/:startDate/:endDate', function ($startDate, $endDate) {
+    global $start;
+    global $end;
+
+    $start = verifyDate($startDate);
+    $end = verifyDate($endDate);
+
+});
+
+$app->get('/api/:startDate/', function ($startDate) {
+    global $start;
+    global $startOnly;
+
+    $start = verifyDate($startDate);
+    $startOnly=true;
+});
+
+
+$app->run();
+
+
 
 // Check that the submitted date is valid
 function verifyDate($date) {
@@ -73,12 +77,11 @@ try{
 // yesterday is assuming we have cron job running
 if (isset($last_updated)) {
 
-    echo 'last updated:'. $last_updated. '<br>';
+//    echo 'last updated:'. $last_updated. '<br>';
 
     $siteInfo = "Data is current until:  " . $last_updated;
     $yesterday = new DateTime($last_updated); //yesterday is whenever site last updated
 
-    print_r($yesterday);
     echo '<br>';
 } else {
     $yesterday = new DateTime("yesterday");
@@ -176,8 +179,7 @@ if(!$error) {
         } else {
             $output = array('remarks' => $remarks);// no data in any selected date
         }
-//        echo 'var jsonReturnData=' . json_encode($output) . ';';
-        echo json_encode($output);
+        echo 'var jsonReturnData=' . json_encode($output) . ';';
 
     } catch (Exception $e){
         $exception = $e->getMessage();
@@ -185,14 +187,8 @@ if(!$error) {
     }
 
 } else { //input error
-//    echo 'var jsonReturnData=' . json_encode($error) . ';';
-    echo json_encode($error);
+    echo 'var jsonReturnData=' . json_encode($error) . ';';
+
 }
 
-// For debugging
-if (isset($errorInfo[2])) {
-    echo $errorInfo[2];
-}
-if (isset($exception)) {
-    echo $exception;
-}
+
