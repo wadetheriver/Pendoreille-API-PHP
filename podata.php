@@ -1,7 +1,18 @@
 <?php
+require 'vendor/autoload.php';
+require 'vendor/slim/slim/Slim/Slim.php';
+\Slim\Slim::registerAutoloader();
 
 use MyFoundationphp\Calculate\Average as Avg ; //filename is Average.php
 require_once('src/MyFoundationphp/Average.php');
+
+$app = new \Slim\Slim();
+
+$app->get('/hello/:name', function ($name) {
+    echo "Hello, $name";
+});
+
+$app->run();
 
 date_default_timezone_set("America/Los_Angeles");
 // Initialize variables
@@ -11,12 +22,16 @@ $startOnly = false;
 $error = null;
 $siteInfo = null;
 
+//print_r($_GET);
+
 // Get the start and end dates from the URL
 if (isset($_GET['startDate'])) {
     $start = verifyDate($_GET['startDate']);
+    echo $start . '<br>';
 }
 if (isset($_GET['endDate'])) {
     $end = verifyDate($_GET['endDate']);
+    echo $end . '</br>';
 } else {
     $startOnly = true;
 }
@@ -48,15 +63,23 @@ try{
         $last_updated = $row['max_date'];
     }
 
+
 }catch (Exception $e) {
     $exception = $e-> getMessage();
 }
 
 
 //$yesterday = new DateTime("yesterday");
+// yesterday is assuming we have cron job running
 if (isset($last_updated)) {
+
+    echo 'last updated:'. $last_updated. '<br>';
+
     $siteInfo = "Data is current until:  " . $last_updated;
     $yesterday = new DateTime($last_updated); //yesterday is whenever site last updated
+
+    print_r($yesterday);
+    echo '<br>';
 } else {
     $yesterday = new DateTime("yesterday");
     $siteInfo = "Cannot determine the last day the API has been updated";

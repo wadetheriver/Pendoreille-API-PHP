@@ -1,4 +1,5 @@
 <?php
+
 require_once 'Foundationphp/Calculate/Average.php';
 
 use Foundationphp\Calculate\Average as Avg;

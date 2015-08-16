@@ -1,0 +1,13 @@
+{
+    "name": "waspane/pendoreille-api-php",
+    "description": "API for Lake Pendoreille Data",
+    "require": {
+        "slim/slim": "2.*"
+    },
+    "authors": [
+        {
+            "name": "Wade Spani",
+            "email": "wadetheriver@gmail.com"
+        }
+    ]
+}
